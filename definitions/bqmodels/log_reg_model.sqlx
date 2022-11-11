@@ -11,7 +11,7 @@ CREATE OR REPLACE MODEL ${self()} OPTIONS (
   input_label_cols = ['churned'],
   early_stop = TRUE,
   min_rel_progress = 0.01,
-  warm_start = TRUE,
+#  warm_start = TRUE,
   enable_global_explain = TRUE
 ) AS
 SELECT
