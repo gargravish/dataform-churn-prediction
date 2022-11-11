@@ -2,7 +2,7 @@ config {
   type: "view",
   schema: "user_propensity",
   name: "df_processed_data",
-  description: "Any user who spent at least 10 minutes on the app, but after 24 hour from when they first engaged with the app, never used the app again."
+  description: "Combine these three intermediary views (label, demographic, and behavioral data) into the final training data.."
 }
 
 (
