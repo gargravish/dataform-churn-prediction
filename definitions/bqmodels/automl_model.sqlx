@@ -3,17 +3,13 @@ config {
   hasOutput: true,
   schema: 'user_propensity',
   tags: ["training"],
-  name: "df_log_reg_model"
+  name: "df_automl_model"
 }
 
 CREATE OR REPLACE MODEL ${self()} OPTIONS (
-  model_type = 'LOGISTIC_REG',
-  auto_class_weights = TRUE,
-  input_label_cols = ['churned'],
-  early_stop = TRUE,
-  min_rel_progress = 0.01,
-#  warm_start = TRUE,
-  enable_global_explain = TRUE
+  model_type = 'AUTOML_CLASSIFIER',
+  budget_hours = 2.0,
+  input_label_cols = ['churned']
 ) AS
 SELECT
   * EXCEPT(user_pseudo_id,splits)

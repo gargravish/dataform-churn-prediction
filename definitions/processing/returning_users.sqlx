@@ -12,7 +12,7 @@ config {
       MIN(event_timestamp) AS user_first_engagement,
       MAX(event_timestamp) AS user_last_engagement
     FROM
-      ${ref("events_tab")}
+      ${ref("events_*")}
     WHERE event_name="user_engagement"
     GROUP BY
       user_pseudo_id

@@ -1,6 +1,7 @@
 config {
   type: 'operations',
   hasOutput: true,
+  schema: 'user_propensity',
   tags: ["training"],
   name: "df_xgboost_model"
 }

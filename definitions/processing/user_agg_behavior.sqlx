@@ -12,7 +12,7 @@ WITH
     SELECT
       e.*
     FROM
-      ${ref("events_tab")} e
+      ${ref("events_*")} e
     JOIN
       ${ref("df_returning_users")} r
     ON
