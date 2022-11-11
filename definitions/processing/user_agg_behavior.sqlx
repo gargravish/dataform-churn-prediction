@@ -14,7 +14,7 @@ WITH
     FROM
       ${ref("events_tab")} e
     JOIN
-      ${ref("df_returning_users")}
+      ${ref("df_returning_users")} r
     ON
       e.user_pseudo_id = r.user_pseudo_id
     WHERE
