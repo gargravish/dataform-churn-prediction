@@ -1,0 +1,22 @@
+config {
+  type: 'operations',
+  hasOutput: true,
+  tags: ["training"],
+  name: "df_log_reg_model"
+}
+
+CREATE OR REPLACE MODEL ${self()} OPTIONS (
+  model_type = 'LOGISTIC_REG',
+  auto_class_weights = TRUE,
+  input_label_cols = ['churned'],
+  early_stop = TRUE,
+  min_rel_progress = 0.01,
+  warm_start = TRUE,
+  enable_global_explain = TRUE
+) AS
+SELECT
+  * EXCEPT(splits)
+FROM
+  ${ref('df_train_eval_test_data')}
+WHERE
+  splits = 'TRAIN'
