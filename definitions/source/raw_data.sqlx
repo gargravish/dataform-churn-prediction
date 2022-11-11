@@ -1,0 +1,7 @@
+config {
+  type: "declaration",
+  database: "raves-altostrat",
+  schema: "user_propensity",
+  name: "events_tab",
+  description: "User Propensity Raw data"
+}
