@@ -1,0 +1,7 @@
+config {
+  type: 'operations',
+  hasOutput: true,
+  schema: 'user_propensity',
+  tags: ["predict"],
+  name: "df_best_model_predict"
+}
