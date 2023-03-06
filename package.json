@@ -1,0 +1,6 @@
+{
+  "name": "user_propensity_prediction_model",
+  "dependencies": {
+    "@dataform/core": "2.0.1"
+  }
+}

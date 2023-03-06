@@ -1,0 +1,19 @@
+config {
+  type: 'operations',
+  hasOutput: true,
+  schema: 'user_propensity',
+  tags: ["training"],
+  name: "df_automl_model"
+}
+
+CREATE OR REPLACE MODEL ${self()} OPTIONS (
+  model_type = 'AUTOML_CLASSIFIER',
+  budget_hours = 2.0,
+  input_label_cols = ['churned']
+) AS
+SELECT
+  * EXCEPT(user_pseudo_id,splits)
+FROM
+  ${ref('df_train_eval_test_data')}
+WHERE
+  splits = 'TRAIN'

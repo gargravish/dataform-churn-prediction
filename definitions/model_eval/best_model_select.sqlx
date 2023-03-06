@@ -1,0 +1,26 @@
+config {
+  type: 'operations',
+  hasOutput: true,
+  schema: 'user_propensity',
+  tags: ["predict"],
+  name: "df_best_model_select"
+}
+
+declare best_model string;
+set best_model = (with model_eval as (
+with xgboost_eval as (
+select * from ml.evaluate(MODEL ${ref("df_xgboost_model")},(select * from ${ref("df_train_eval_test_data")} where splits='VALIDATE'),struct(0.25 as threshold))
+),
+log_reg_eval as ( 
+select * from ml.evaluate(MODEL ${ref("df_log_reg_model")},(select * from ${ref("df_train_eval_test_data")} where splits='VALIDATE'),struct(0.5 as threshold))
+),
+automl_eval as (
+  select * from ml.evaluate(MODEL ${ref("df_automl_model")},(select * from ${ref("df_train_eval_test_data")} where splits='VALIDATE'),struct(0.5 as threshold))
+)
+select *,"df_xgboost_model" as model_name from xgboost_eval union all 
+select *,"df_log_reg_model" as model_name from log_reg_eval union all 
+select *,"df_automl_model" as model_name from automl_eval
+)
+select model_name from model_eval where f1_score = (select max(f1_score) from model_eval));
+
+execute immediate format (""" create or replace view user_propensity.best_model_predict as select * from ml.predict(MODEL `raves-altostrat.user_propensity.%s`,(select * from ${ref("df_train_eval_test_data")} where splits='TEST'))""",best_model)

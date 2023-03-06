@@ -1,0 +1,14 @@
+config {
+  type: "view",
+  schema: "user_propensity",
+  name: "df_train_eval_test_data",
+  description: "Splitting the processed dataset in TRAIN (80%), VALIDATE (10%), and TEST (10%)."
+}
+
+SELECT *,
+    CASE 
+        WHEN MOD(ABS(FARM_FINGERPRINT(user_pseudo_id)),10) < 8 THEN "TRAIN" 
+        WHEN MOD(ABS(FARM_FINGERPRINT(user_pseudo_id)),10) < 9 THEN "VALIDATE"
+        ELSE "TEST"
+    END AS splits
+FROM ${ref("df_processed_data")}
