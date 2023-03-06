@@ -26,7 +26,7 @@ config {
     EXTRACT(DAYOFYEAR from TIMESTAMP_MICROS(user_first_engagement)) as julianday,
     EXTRACT(DAYOFWEEK from TIMESTAMP_MICROS(user_first_engagement)) as dayofweek,
 
-    #add 24 hr to user's first touch
+    #add 24 hr to users first touch
     (user_first_engagement + 86400000000) AS ts_24hr_after_first_engagement,
 
 #churned = 1 if last_touch within 24 hr of app installation, else 0
