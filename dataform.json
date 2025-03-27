@@ -2,7 +2,7 @@
   "defaultSchema": "dataform",
   "assertionSchema": "dataform_assertions",
   "warehouse": "bigquery",
-  "defaultDatabase": "raves-altostrat",
+  "defaultDatabase": "PROJECT_ID",
   "defaultLocation": "US"
 }
     
