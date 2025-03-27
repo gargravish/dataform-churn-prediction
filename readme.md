@@ -1,12 +1,5 @@
 # Churn Prediction for Mobile Application
 
- ...<snip>... 
-  "defaultDatabase": "raves-altostrat",
-  "defaultLocation": "US"
-}
-
-6.  **Install project dependencies:** Run `npm install` to install the Dataform project dependencies.
-
 ## Execution
 
 To execute the Dataform project and run the churn prediction pipeline:
